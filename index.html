@@ -4,113 +4,293 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no,email=no,address=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Vendor Directory</title>
 <style>
-body {
-  margin: 0;
-  padding: 12px;
-  background: #f5f7fb;
-  color: #17212b;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+:root {
+  --bg: #eef3f7;
+  --surface: #ffffff;
+  --surface-2: #f7fafc;
+  --text: #183246;
+  --muted: #60758a;
+  --line: #d8e3ea;
+  --line-strong: #bdd0dc;
+  --brand: #00a7c8;
+  --brand-2: #0b6b8d;
+  --brand-soft: #e4f7fb;
+  --shadow: 0 10px 30px rgba(24, 50, 70, 0.08);
+  --radius: 18px;
+  --radius-sm: 12px;
 }
 * { box-sizing: border-box; }
-.wrap { max-width: 1280px; margin: 0 auto; }
-.panel {
-  background: #fff;
-  border: 1px solid #d8e0ea;
-  border-radius: 16px;
-  padding: 14px;
-  margin-bottom: 14px;
+html, body { margin: 0; padding: 0; }
+body {
+  background:
+    radial-gradient(circle at top right, rgba(0, 167, 200, 0.08), transparent 24rem),
+    linear-gradient(180deg, #f8fbfd 0%, var(--bg) 100%);
+  color: var(--text);
+  font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  padding: 16px;
 }
-h1 { margin: 0 0 8px; font-size: 28px; }
-p { margin: 0; color: #5f6c7b; line-height: 1.4; }
+a {
+  color: var(--brand-2);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.wrap {
+  max-width: 1760px;
+  margin: 0 auto;
+}
+.panel {
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(189, 208, 220, 0.9);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+.hero {
+  padding: 22px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  position: relative;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -80px;
+  top: -80px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,167,200,0.18), rgba(0,167,200,0) 70%);
+  pointer-events: none;
+}
+h1 {
+  margin: 0 0 6px;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.subhead {
+  margin: 0;
+  color: var(--muted);
+  max-width: 900px;
+}
 .grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin-top: 12px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+input, select, button {
+  font: inherit;
 }
 input, select {
   width: 100%;
-  padding: 11px 12px;
-  border: 1px solid #cfd8e3;
-  border-radius: 12px;
-  background: #fff;
-  color: #17212b;
-  font: inherit;
+  min-height: 46px;
+  padding: 11px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
   -webkit-appearance: none;
   appearance: none;
 }
+input:focus, select:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px rgba(0, 167, 200, 0.12);
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
 button {
-  padding: 10px 12px;
-  border: 1px solid #cfd8e3;
-  border-radius: 12px;
-  background: #fff;
-  font: inherit;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff 0%, #f8fbfd 100%);
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(24, 50, 70, 0.05);
 }
-.actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-.stats { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+button:hover {
+  border-color: var(--brand);
+}
+.stats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
 .stat {
-  background: #eef3fb;
-  padding: 8px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(0, 167, 200, 0.16);
+  background: var(--brand-soft);
+  color: var(--brand-2);
+  padding: 9px 12px;
   border-radius: 999px;
-  font-size: 13px;
+  font-weight: 600;
 }
-.cards { display: grid; gap: 12px; }
-.card {
-  background: #fff;
-  border: 1px solid #d8e0ea;
-  border-radius: 16px;
-  padding: 14px;
+.table-panel {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 6px 0 0;
 }
-.card h3 { margin: 0 0 6px; font-size: 20px; }
-.meta { color: #5f6c7b; font-size: 13px; margin-bottom: 10px; }
-.row { margin: 8px 0; }
-.label { color: #5f6c7b; font-size: 13px; margin-bottom: 3px; }
-.value { line-height: 1.4; word-break: break-word; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip {
-  background: #eef2f7;
-  border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 12px;
+table {
+  width: 100%;
+  min-width: 1680px;
+  border-collapse: separate;
+  border-spacing: 0;
 }
-.empty {
-  padding: 20px;
-  color: #5f6c7b;
-  background: #fff;
-  border: 1px solid #d8e0ea;
-  border-radius: 16px;
-}
-table { width: 100%; border-collapse: collapse; min-width: 980px; }
 th, td {
-  border-bottom: 1px solid #e4e9f0;
   text-align: left;
   vertical-align: top;
-  padding: 10px 12px;
+  padding: 14px 14px;
+  border-bottom: 1px solid #e6eef3;
 }
 th {
   position: sticky;
   top: 0;
-  background: #fbfcfe;
-  color: #5f6c7b;
-  font-size: 13px;
+  z-index: 2;
+  background: #f9fcfe;
+  color: var(--brand-2);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
 }
-.desktop { display: none; overflow: auto; -webkit-overflow-scrolling: touch; }
-a { color: #2457d6; text-decoration: none; }
-@media (min-width: 960px) {
-  body { padding: 18px; }
-  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .desktop { display: block; }
-  .mobile { display: none; }
+tbody tr:nth-child(even) {
+  background: rgba(247, 250, 252, 0.8);
+}
+tbody tr:hover {
+  background: rgba(0, 167, 200, 0.05);
+}
+.col-vendor { min-width: 190px; }
+.col-category { min-width: 170px; }
+.col-subcategory { min-width: 220px; }
+.col-offerings { min-width: 300px; }
+.col-contact { min-width: 220px; }
+.col-phone, .col-mobile { min-width: 150px; white-space: nowrap; }
+.col-email { min-width: 260px; }
+.col-website { min-width: 260px; }
+.col-notes { min-width: 280px; }
+.value, .stack {
+  word-break: break-word;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.muted {
+  color: var(--muted);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffffff 0%, #eff9fc 100%);
+  border: 1px solid rgba(0, 167, 200, 0.22);
+  color: var(--brand-2);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: normal;
+}
+.chip.empty-chip {
+  background: #f3f6f8;
+  border-color: #dce6ec;
+  color: var(--muted);
+}
+.link-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(11, 107, 141, 0.14);
+  background: #f4fbfd;
+  font-size: 13px;
+  font-weight: 600;
+}
+.mobile {
+  display: none;
+}
+.cards {
+  display: grid;
+  gap: 14px;
+}
+.card {
+  padding: 16px;
+}
+.card h3 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  line-height: 1.15;
+}
+.meta {
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.row {
+  margin-top: 12px;
+}
+.label {
+  color: var(--brand-2);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.empty {
+  margin-top: 14px;
+  padding: 24px;
+  color: var(--muted);
+  display: none;
+}
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 960px) {
+  body { padding: 12px; }
+  .hero { padding: 18px; }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .desktop {
+    display: none !important;
+  }
+  .mobile {
+    display: block;
+  }
 }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="panel">
+  <div class="panel hero">
     <h1>Vendor Directory</h1>
-    <p>Ultra-compatible standalone build for local file use. No localStorage, no JSON import/export, no Blob downloads, no dynamic regular expressions.</p>
+    <p class="subhead">Search and filter across vendors, offerings, contacts, phone numbers, websites, and notes. Optimized for desktop tables and mobile cards.</p>
     <div class="grid">
       <input id="search" type="text" placeholder="Search all fields">
       <select id="category"></select>
@@ -128,20 +308,20 @@ a { color: #2457d6; text-decoration: none; }
     </div>
   </div>
 
-  <div id="desktop" class="panel desktop">
+  <div id="desktop" class="panel desktop table-panel">
     <table>
       <thead>
         <tr>
-          <th>Vendor</th>
-          <th>Category</th>
-          <th>Subcategory</th>
-          <th>Offerings</th>
-          <th>Contact</th>
-          <th>Phone</th>
-          <th>Mobile</th>
-          <th>Email</th>
-          <th>Website</th>
-          <th>Notes</th>
+          <th class="col-vendor">Vendor</th>
+          <th class="col-category">Category</th>
+          <th class="col-subcategory">Subcategory</th>
+          <th class="col-offerings">Offerings</th>
+          <th class="col-contact">Contact</th>
+          <th class="col-phone">Phone</th>
+          <th class="col-mobile">Mobile</th>
+          <th class="col-email">Email</th>
+          <th class="col-website">Website</th>
+          <th class="col-notes">Notes</th>
         </tr>
       </thead>
       <tbody id="tableBody"></tbody>
@@ -149,7 +329,7 @@ a { color: #2457d6; text-decoration: none; }
   </div>
 
   <div id="mobile" class="mobile cards"></div>
-  <div id="empty" class="empty" style="display:none;">No matching records.</div>
+  <div id="empty" class="panel empty">No matching records.</div>
 </div>
 
 <script id="records-data" type="application/json">
@@ -455,7 +635,7 @@ a { color: #2457d6; text-decoration: none; }
     "id": 20,
     "category": "Material Movement",
     "subcategory": "Fixed Conveyance",
-   "vendor": "AutoStore",
+    "vendor": "AutoStore",
     "contact": "Bryan Crosby",
     "phone": "804-347-3988",
     "mobile": "804-347-3988",
@@ -546,7 +726,7 @@ a { color: #2457d6; text-decoration: none; }
     "id": 26,
     "category": "Material Movement",
     "subcategory": "Mobile Conveyance",
-   "vendor": "Interlake Mecalux",
+    "vendor": "Interlake Mecalux",
     "contact": "Yiannos Simonos",
     "phone": "551-305-1179",
     "mobile": "551-305-1179",
@@ -567,7 +747,7 @@ a { color: #2457d6; text-decoration: none; }
     "phone": "508-210-9427",
     "mobile": "508-210-9427",
     "email": "thanna@gibsonengineering.com",
-    "website": "https://www/gibsonengineering.com",
+    "website": "https://www.gibsonengineering.com",
     "offerings": [
       "AMR"
     ],
@@ -799,10 +979,22 @@ a { color: #2457d6; text-decoration: none; }
     "category": "Support Technologies",
     "subcategory": "Identification",
     "vendor": "Cognex",
-    "contact": ["Dan Rossitto (MA/NH)","James Carlucci (NY/CT)"],
-    "phone": ["603-852-0432","914-482-1518"],
-    "mobile": ["603-852-0432","914-482-1518"],
-    "email": ["Dan.Rossitto@cognex.com","James.Carlucci@cognex.com"],
+    "contact": [
+      "Dan Rossitto (MA/NH)",
+      "James Carlucci (NY/CT)"
+    ],
+    "phone": [
+      "603-852-0432",
+      "914-482-1518"
+    ],
+    "mobile": [
+      "603-852-0432",
+      "914-482-1518"
+    ],
+    "email": [
+      "Dan.Rossitto@cognex.com",
+      "James.Carlucci@cognex.com"
+    ],
     "website": "https://www.cognex.com",
     "offerings": [
       "Barcode Scanning"
@@ -877,11 +1069,23 @@ a { color: #2457d6; text-decoration: none; }
     "id": 47,
     "category": "Support Technologies",
     "subcategory": "Vision",
-     "vendor": "Cognex",
-    "contact": ["Dan Rossitto (MA/NH)","James Carlucci (NY/CT)"],
-    "phone": ["603-852-0432","914-482-1518"],
-    "mobile": ["603-852-0432","914-482-1518"],
-    "email": ["Dan.Rossitto@cognex.com","James.Carlucci@cognex.com"],
+    "vendor": "Cognex",
+    "contact": [
+      "Dan Rossitto (MA/NH)",
+      "James Carlucci (NY/CT)"
+    ],
+    "phone": [
+      "603-852-0432",
+      "914-482-1518"
+    ],
+    "mobile": [
+      "603-852-0432",
+      "914-482-1518"
+    ],
+    "email": [
+      "Dan.Rossitto@cognex.com",
+      "James.Carlucci@cognex.com"
+    ],
     "website": "https://www.cognex.com",
     "offerings": [
       "Machine Vision"
@@ -923,7 +1127,7 @@ a { color: #2457d6; text-decoration: none; }
     "id": 50,
     "category": "Robotics",
     "subcategory": "Robotic Picking",
-     "vendor": "ABB",
+    "vendor": "ABB",
     "contact": "Jim Mail",
     "phone": "603-320-3116",
     "mobile": "603-320-3116",
@@ -961,7 +1165,7 @@ a { color: #2457d6; text-decoration: none; }
     "mobile": "617-913-7067",
     "email": "nade@universal-robots.com",
     "website": "https://www.universal-robots.com",
-        "offerings": [
+    "offerings": [
       "Collaborative Robots"
     ],
     "notes": ""
@@ -983,7 +1187,7 @@ a { color: #2457d6; text-decoration: none; }
     "id": 54,
     "category": "Robotics",
     "subcategory": "Robotic Packing",
-   "vendor": "Fanuc",
+    "vendor": "Fanuc",
     "contact": "Keith Gerhardt",
     "phone": "774-338-5818",
     "mobile": "617-817-3133",
@@ -1037,7 +1241,7 @@ a { color: #2457d6; text-decoration: none; }
     "mobile": "617-913-7067",
     "email": "nade@universal-robots.com",
     "website": "https://www.universal-robots.com",
-        "offerings": [
+    "offerings": [
       "Collaborative Robots"
     ],
     "notes": ""
@@ -1046,7 +1250,7 @@ a { color: #2457d6; text-decoration: none; }
     "id": 58,
     "category": "Robotics",
     "subcategory": "Robotic Palletizing",
-   "vendor": "Fanuc",
+    "vendor": "Fanuc",
     "contact": "Keith Gerhardt",
     "phone": "774-338-5818",
     "mobile": "617-817-3133",
@@ -1078,7 +1282,7 @@ a { color: #2457d6; text-decoration: none; }
     "id": 60,
     "category": "Robotics",
     "subcategory": "Robotic Palletizing",
-   "vendor": "Kuka",
+    "vendor": "Kuka",
     "contact": "Jonathan Weibel",
     "phone": "586-668-3781",
     "mobile": "586-668-3781",
@@ -1100,7 +1304,7 @@ a { color: #2457d6; text-decoration: none; }
     "mobile": "617-913-7067",
     "email": "nade@universal-robots.com",
     "website": "https://www.universal-robots.com",
-        "offerings": [
+    "offerings": [
       "Collaborative Robots"
     ],
     "notes": ""
@@ -1126,18 +1330,23 @@ a { color: #2457d6; text-decoration: none; }
 (function () {
   var raw = document.getElementById('records-data').textContent || '[]';
   var records = JSON.parse(raw);
-  var filtered = records.slice(0);
 
   function el(id) {
     return document.getElementById(id);
   }
 
-  function txt(v) {
+  function toArray(v) {
+    if (Array.isArray(v)) return v;
+    if (v === null || v === undefined || v === '') return [];
+    return [v];
+  }
+
+  function text(v) {
     return v === null || v === undefined ? '' : String(v);
   }
 
   function esc(v) {
-    return txt(v)
+    return text(v)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
@@ -1145,132 +1354,214 @@ a { color: #2457d6; text-decoration: none; }
       .replace(/'/g, '&#39;');
   }
 
-  function uniq(arr) {
-    var m = {};
+  function uniq(values) {
+    var seen = Object.create(null);
     var out = [];
-    var i, v;
-    for (i = 0; i < arr.length; i++) {
-      v = txt(arr[i]).replace(/^\s+|\s+$/g, '');
-      if (v && !m[v]) {
-        m[v] = true;
-        out.push(v);
+    for (var i = 0; i < values.length; i++) {
+      var value = text(values[i]).trim();
+      if (value && !seen[value]) {
+        seen[value] = true;
+        out.push(value);
       }
     }
-    out.sort();
+    out.sort(function(a, b) { return a.localeCompare(b); });
     return out;
   }
 
-  function offeringsText(r) {
-    var arr = r.offerings && r.offerings.join ? r.offerings : [];
-    return arr.join(' • ');
+  function normalizeWebsite(url) {
+    var u = text(url).trim();
+    if (!u) return '';
+    if (u.indexOf('http://') !== 0 && u.indexOf('https://') !== 0) {
+      u = 'https://' + u.replace(/^\/+/, '');
+    }
+    return u.replace('https://www/', 'https://www.');
   }
 
-  function blob(r) {
+  function formatUSPhone(value) {
+    var raw = text(value).trim();
+    if (!raw || raw === 'XXX-XXX-XXXX') return raw;
+    if (raw.indexOf('+') === 0 && raw.indexOf('+1') !== 0) return raw;
+    var digits = raw.replace(/\D/g, '');
+    if (digits.length === 10) {
+      return '+1 ' + digits.slice(0, 3) + '-' + digits.slice(3, 6) + '-' + digits.slice(6);
+    }
+    if (digits.length === 11 && digits.charAt(0) === '1') {
+      return '+1 ' + digits.slice(1, 4) + '-' + digits.slice(4, 7) + '-' + digits.slice(7);
+    }
+    return raw;
+  }
+
+  function prepRecord(r) {
+    r.website = normalizeWebsite(r.website);
+    r.phone = Array.isArray(r.phone)
+      ? r.phone.map(formatUSPhone)
+      : formatUSPhone(r.phone);
+    r.mobile = Array.isArray(r.mobile)
+      ? r.mobile.map(formatUSPhone)
+      : formatUSPhone(r.mobile);
+    return r;
+  }
+
+  for (var i = 0; i < records.length; i++) {
+    prepRecord(records[i]);
+  }
+
+  function flattenField(v) {
+    return toArray(v).join(' | ');
+  }
+
+  function offeringsText(r) {
+    return toArray(r.offerings).join(' • ');
+  }
+
+  function searchBlob(r) {
     return [
-      txt(r.category), txt(r.subcategory), txt(r.vendor), txt(r.contact),
-      txt(r.phone), txt(r.mobile), txt(r.email), txt(r.website),
-      txt(r.notes), offeringsText(r)
+      r.category,
+      r.subcategory,
+      r.vendor,
+      flattenField(r.contact),
+      flattenField(r.phone),
+      flattenField(r.mobile),
+      flattenField(r.email),
+      r.website,
+      r.notes,
+      offeringsText(r)
     ].join(' | ').toLowerCase();
   }
 
-  function setOptions(select, first, values) {
+  function setOptions(select, label, values) {
     var current = select.value || '';
-    var html = '<option value="">' + esc(first) + '</option>';
-    var i, v;
-    for (i = 0; i < values.length; i++) {
-      v = values[i];
-      html += '<option value="' + esc(v) + '"' + (v === current ? ' selected' : '') + '>' + esc(v) + '</option>';
+    var html = '<option value="">' + esc(label) + '</option>';
+    for (var i = 0; i < values.length; i++) {
+      var value = values[i];
+      html += '<option value="' + esc(value) + '"' + (value === current ? ' selected' : '') + '>' + esc(value) + '</option>';
     }
     select.innerHTML = html;
   }
 
-  function populate() {
-    setOptions(el('category'), 'All categories', uniq(records.map(function(r){return r.category;})));
-    setOptions(el('subcategory'), 'All subcategories', uniq(records.map(function(r){return r.subcategory;})));
-    setOptions(el('vendor'), 'All vendors', uniq(records.map(function(r){return r.vendor;})));
-    setOptions(el('contact'), 'All contacts', uniq(records.map(function(r){return r.contact;})));
-
-    var offers = [];
-    var i, j, arr;
-    for (i = 0; i < records.length; i++) {
-      arr = records[i].offerings || [];
-      for (j = 0; j < arr.length; j++) {
-        offers.push(arr[j]);
+  function collectValues(field) {
+    var values = [];
+    for (var i = 0; i < records.length; i++) {
+      var arr = toArray(records[i][field]);
+      for (var j = 0; j < arr.length; j++) {
+        values.push(arr[j]);
       }
     }
-    setOptions(el('offering'), 'All offerings', uniq(offers));
+    return uniq(values);
   }
 
-  function applyFilters() {
-    var q = txt(el('search').value).toLowerCase();
-    var c = txt(el('category').value);
-    var s = txt(el('subcategory').value);
-    var v = txt(el('vendor').value);
-    var ct = txt(el('contact').value);
-    var o = txt(el('offering').value);
+  function populateFilters() {
+    setOptions(el('category'), 'All categories', collectValues('category'));
+    setOptions(el('subcategory'), 'All subcategories', collectValues('subcategory'));
+    setOptions(el('vendor'), 'All vendors', collectValues('vendor'));
+    setOptions(el('contact'), 'All contacts', collectValues('contact'));
 
-    filtered = records.filter(function (r) {
-      var ok = true;
-      if (q && blob(r).indexOf(q) === -1) ok = false;
-      if (c && txt(r.category) !== c) ok = false;
-      if (s && txt(r.subcategory) !== s) ok = false;
-      if (v && txt(r.vendor) !== v) ok = false;
-      if (ct && txt(r.contact) !== ct) ok = false;
-      if (o) {
-        var found = false;
-        var arr = r.offerings || [];
-        for (var i = 0; i < arr.length; i++) {
-          if (txt(arr[i]) === o) {
-            found = true;
-            break;
-          }
-        }
-        if (!found) ok = false;
-      }
-      return ok;
+    var offeringValues = [];
+    for (var i = 0; i < records.length; i++) {
+      offeringValues = offeringValues.concat(toArray(records[i].offerings));
+    }
+    setOptions(el('offering'), 'All offerings', uniq(offeringValues));
+  }
+
+  function hasMatch(field, selected) {
+    if (!selected) return true;
+    var values = toArray(field);
+    for (var i = 0; i < values.length; i++) {
+      if (text(values[i]) === selected) return true;
+    }
+    return false;
+  }
+
+  function renderChips(values, emptyLabel) {
+    var arr = toArray(values);
+    if (!arr.length) return '<span class="chip empty-chip">' + esc(emptyLabel || '—') + '</span>';
+    var out = '';
+    for (var i = 0; i < arr.length; i++) {
+      out += '<span class="chip">' + esc(arr[i]) + '</span>';
+    }
+    return out;
+  }
+
+  function renderStack(values, formatter) {
+    var arr = toArray(values);
+    if (!arr.length) return '<span class="muted">—</span>';
+    var out = '<div class="stack">';
+    for (var i = 0; i < arr.length; i++) {
+      out += '<div>' + (formatter ? formatter(arr[i]) : esc(arr[i])) + '</div>';
+    }
+    out += '</div>';
+    return out;
+  }
+
+  function renderEmail(value) {
+    var v = text(value).trim();
+    if (!v) return '<span class="muted">—</span>';
+    return '<a href="mailto:' + esc(v) + '">' + esc(v) + '</a>';
+  }
+
+  function compactLabelFromUrl(url) {
+    var clean = text(url).replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '');
+    return clean || text(url);
+  }
+
+  function renderWebsite(value) {
+    var url = text(value).trim();
+    if (!url) return '<span class="muted">—</span>';
+    return '<a class="link-chip" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(compactLabelFromUrl(url)) + '</a>';
+  }
+
+  function filterRecords() {
+    var q = text(el('search').value).toLowerCase().trim();
+    var category = text(el('category').value);
+    var subcategory = text(el('subcategory').value);
+    var vendor = text(el('vendor').value);
+    var contact = text(el('contact').value);
+    var offering = text(el('offering').value);
+
+    return records.filter(function (r) {
+      if (q && searchBlob(r).indexOf(q) === -1) return false;
+      if (!hasMatch(r.category, category)) return false;
+      if (!hasMatch(r.subcategory, subcategory)) return false;
+      if (!hasMatch(r.vendor, vendor)) return false;
+      if (!hasMatch(r.contact, contact)) return false;
+      if (!hasMatch(r.offerings, offering)) return false;
+      return true;
     });
-    render();
   }
 
   function render() {
+    var filtered = filterRecords();
     var tableHtml = '';
     var cardsHtml = '';
-    var i, r, offers, j, emailHtml, webHtml;
 
-    for (i = 0; i < filtered.length; i++) {
-      r = filtered[i];
-      emailHtml = r.email ? '<a href="mailto:' + esc(r.email) + '">' + esc(r.email) + '</a>' : '';
-      webHtml = r.website ? esc(r.website) : '';
-      tableHtml += '<tr>' +
-        '<td>' + esc(r.vendor) + '</td>' +
-        '<td>' + esc(r.category) + '</td>' +
-        '<td>' + esc(r.subcategory) + '</td>' +
-        '<td>' + esc(offeringsText(r)) + '</td>' +
-        '<td>' + esc(r.contact) + '</td>' +
-        '<td>' + esc(r.phone) + '</td>' +
-        '<td>' + esc(r.mobile) + '</td>' +
-        '<td>' + emailHtml + '</td>' +
-        '<td>' + webHtml + '</td>' +
-        '<td>' + esc(r.notes) + '</td>' +
-      '</tr>';
+    for (var i = 0; i < filtered.length; i++) {
+      var r = filtered[i];
+      tableHtml += ''
+        + '<tr>'
+        + '<td class="col-vendor"><strong>' + esc(r.vendor) + '</strong></td>'
+        + '<td class="col-category">' + esc(r.category) + '</td>'
+        + '<td class="col-subcategory">' + esc(r.subcategory) + '</td>'
+        + '<td class="col-offerings"><div class="chips">' + renderChips(r.offerings, '—') + '</div></td>'
+        + '<td class="col-contact">' + renderStack(r.contact) + '</td>'
+        + '<td class="col-phone">' + renderStack(r.phone) + '</td>'
+        + '<td class="col-mobile">' + renderStack(r.mobile) + '</td>'
+        + '<td class="col-email">' + renderStack(r.email, renderEmail) + '</td>'
+        + '<td class="col-website">' + renderWebsite(r.website) + '</td>'
+        + '<td class="col-notes">' + (r.notes ? esc(r.notes) : '<span class="muted">—</span>') + '</td>'
+        + '</tr>';
 
-      offers = '';
-      if (r.offerings && r.offerings.length) {
-        for (j = 0; j < r.offerings.length; j++) {
-          offers += '<span class="chip">' + esc(r.offerings[j]) + '</span>';
-        }
-      }
-      cardsHtml += '<div class="card">' +
-        '<h3>' + esc(r.vendor) + '</h3>' +
-        '<div class="meta">' + esc(r.category) + ' • ' + esc(r.subcategory) + '</div>' +
-        '<div class="row"><div class="label">Offerings</div><div class="value"><div class="chips">' + (offers || '<span class="chip">—</span>') + '</div></div></div>' +
-        '<div class="row"><div class="label">Contact</div><div class="value">' + esc(r.contact) + '</div></div>' +
-        '<div class="row"><div class="label">Phone</div><div class="value">' + esc(r.phone) + '</div></div>' +
-        '<div class="row"><div class="label">Mobile</div><div class="value">' + esc(r.mobile) + '</div></div>' +
-        '<div class="row"><div class="label">Email</div><div class="value">' + emailHtml + '</div></div>' +
-        '<div class="row"><div class="label">Website</div><div class="value">' + webHtml + '</div></div>' +
-        '<div class="row"><div class="label">Notes</div><div class="value">' + esc(r.notes) + '</div></div>' +
-      '</div>';
+      cardsHtml += ''
+        + '<div class="panel card">'
+        +   '<h3>' + esc(r.vendor) + '</h3>'
+        +   '<div class="meta">' + esc(r.category) + ' • ' + esc(r.subcategory) + '</div>'
+        +   '<div class="row"><div class="label">Offerings</div><div class="chips">' + renderChips(r.offerings, '—') + '</div></div>'
+        +   '<div class="row"><div class="label">Contact</div><div class="value">' + renderStack(r.contact) + '</div></div>'
+        +   '<div class="row"><div class="label">Phone</div><div class="value">' + renderStack(r.phone) + '</div></div>'
+        +   '<div class="row"><div class="label">Mobile</div><div class="value">' + renderStack(r.mobile) + '</div></div>'
+        +   '<div class="row"><div class="label">Email</div><div class="value">' + renderStack(r.email, renderEmail) + '</div></div>'
+        +   '<div class="row"><div class="label">Website</div><div class="value">' + renderWebsite(r.website) + '</div></div>'
+        +   '<div class="row"><div class="label">Notes</div><div class="value">' + (r.notes ? esc(r.notes) : '<span class="muted">—</span>') + '</div></div>'
+        + '</div>';
     }
 
     el('tableBody').innerHTML = tableHtml;
@@ -1278,14 +1569,12 @@ a { color: #2457d6; text-decoration: none; }
     el('visibleCount').textContent = String(filtered.length);
     el('totalCount').textContent = String(records.length);
     el('empty').style.display = filtered.length ? 'none' : 'block';
-    el('desktop').style.display = window.innerWidth >= 960 ? 'block' : 'none';
   }
 
   function bind() {
-    var ids = ['search','category','subcategory','vendor','contact','offering'];
+    var ids = ['search', 'category', 'subcategory', 'vendor', 'contact', 'offering'];
     for (var i = 0; i < ids.length; i++) {
-      var node = el(ids[i]);
-      node.addEventListener(ids[i] === 'search' ? 'input' : 'change', applyFilters);
+      el(ids[i]).addEventListener(ids[i] === 'search' ? 'input' : 'change', render);
     }
     el('clearBtn').addEventListener('click', function () {
       el('search').value = '';
@@ -1294,12 +1583,11 @@ a { color: #2457d6; text-decoration: none; }
       el('vendor').value = '';
       el('contact').value = '';
       el('offering').value = '';
-      applyFilters();
+      render();
     });
-    window.addEventListener('resize', render);
   }
 
-  populate();
+  populateFilters();
   bind();
   render();
 }());
