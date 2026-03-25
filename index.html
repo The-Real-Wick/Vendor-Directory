@@ -11,7 +11,8 @@
 <style>
 :root {
   --bg: #eef3f7;
-  --surface: #ffffff;
+  --surface: rgba(255,255,255,0.94);
+  --surface-solid: #ffffff;
   --surface-2: #f7fafc;
   --text: #183246;
   --muted: #60758a;
@@ -31,22 +32,19 @@ body {
     radial-gradient(circle at top right, rgba(0, 167, 200, 0.08), transparent 24rem),
     linear-gradient(180deg, #f8fbfd 0%, var(--bg) 100%);
   color: var(--text);
-  font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
   padding: 16px;
 }
 a {
-  color: var(--brand-2);
+  color: inherit;
   text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
 }
 .wrap {
   max-width: 1760px;
   margin: 0 auto;
 }
 .panel {
-  background: rgba(255,255,255,0.94);
+  background: var(--surface);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(189, 208, 220, 0.9);
   border-radius: 24px;
@@ -86,19 +84,17 @@ h1 {
   gap: 12px;
   margin-top: 18px;
 }
-input, select, button {
-  font: inherit;
-}
+input, select, button { font: inherit; }
 input, select {
   width: 100%;
   min-height: 46px;
   padding: 11px 14px;
   border: 1px solid var(--line-strong);
   border-radius: 14px;
-  background: var(--surface);
+  background: var(--surface-solid);
   color: var(--text);
   outline: none;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
   -webkit-appearance: none;
   appearance: none;
 }
@@ -122,9 +118,7 @@ button {
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(24, 50, 70, 0.05);
 }
-button:hover {
-  border-color: var(--brand);
-}
+button:hover { border-color: var(--brand); }
 .stats {
   display: flex;
   gap: 10px;
@@ -142,123 +136,88 @@ button:hover {
   border-radius: 999px;
   font-weight: 600;
 }
-.table-panel {
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 6px 0 0;
-}
-table {
-  width: 100%;
-  min-width: 1680px;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-th, td {
-  text-align: left;
-  vertical-align: top;
-  padding: 14px 14px;
-  border-bottom: 1px solid #e6eef3;
-}
-th {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background: #f9fcfe;
-  color: var(--brand-2);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  white-space: nowrap;
-}
-tbody tr:nth-child(even) {
-  background: rgba(247, 250, 252, 0.8);
-}
-tbody tr:hover {
-  background: rgba(0, 167, 200, 0.05);
-}
-.col-vendor { min-width: 190px; }
-.col-category { min-width: 170px; }
-.col-subcategory { min-width: 220px; }
-.col-offerings { min-width: 300px; }
-.col-contact { min-width: 220px; }
-.col-phone, .col-mobile { min-width: 150px; white-space: nowrap; }
-.col-email { min-width: 260px; }
-.col-website { min-width: 260px; }
-.col-notes { min-width: 280px; }
-.value, .stack {
-  word-break: break-word;
-}
-.stack {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.muted {
-  color: var(--muted);
-}
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.chip {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 5px 11px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #ffffff 0%, #eff9fc 100%);
-  border: 1px solid rgba(0, 167, 200, 0.22);
-  color: var(--brand-2);
-  font-size: 12px;
-  font-weight: 600;
-  white-space: normal;
-}
-.chip.empty-chip {
-  background: #f3f6f8;
-  border-color: #dce6ec;
-  color: var(--muted);
-}
-.link-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 11px;
-  border-radius: 999px;
-  border: 1px solid rgba(11, 107, 141, 0.14);
-  background: #f4fbfd;
-  font-size: 13px;
-  font-weight: 600;
-}
-.mobile {
-  display: none;
-}
 .cards {
   display: grid;
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 16px;
 }
 .card {
-  padding: 16px;
+  padding: 18px;
 }
-.card h3 {
-  margin: 0 0 6px;
-  font-size: 22px;
-  line-height: 1.15;
-}
-.meta {
-  color: var(--muted);
+.card-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
   margin-bottom: 14px;
 }
+.card h3 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.vendor-mark {
+  width: 10px;
+  min-width: 10px;
+  height: 42px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--brand) 0%, var(--brand-2) 100%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35);
+}
 .row {
-  margin-top: 12px;
+  margin-top: 14px;
 }
 .label {
   color: var(--brand-2);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: 6px;
+  margin-bottom: 7px;
   font-weight: 700;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip, .chip-link {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 30px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 167, 200, 0.22);
+  background: linear-gradient(180deg, #ffffff 0%, #eff9fc 100%);
+  color: var(--brand-2);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.chip-link:hover {
+  border-color: var(--brand);
+  background: linear-gradient(180deg, #ffffff 0%, #e4f7fb 100%);
+}
+.chip.empty-chip {
+  background: #f3f6f8;
+  border-color: #dce6ec;
+  color: var(--muted);
+}
+.chip.offering {
+  background: linear-gradient(180deg, #f7fdff 0%, #ddf3f8 100%);
+}
+.chip.phone {
+  background: linear-gradient(180deg, #ffffff 0%, #eef8fb 100%);
+}
+.chip.email {
+  background: linear-gradient(180deg, #ffffff 0%, #edf7fa 100%);
+}
+.chip.website {
+  background: linear-gradient(180deg, #ffffff 0%, #e1f6fb 100%);
 }
 .empty {
   margin-top: 14px;
@@ -267,22 +226,15 @@ tbody tr:hover {
   display: none;
 }
 @media (max-width: 1200px) {
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cards { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
 }
 @media (max-width: 960px) {
   body { padding: 12px; }
   .hero { padding: 18px; }
-  .grid {
-    grid-template-columns: 1fr;
-  }
-  .desktop {
-    display: none !important;
-  }
-  .mobile {
-    display: block;
-  }
+  .grid { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: 1fr; }
+  .card { padding: 16px; }
 }
 </style>
 </head>
@@ -290,7 +242,7 @@ tbody tr:hover {
 <div class="wrap">
   <div class="panel hero">
     <h1>Vendor Directory</h1>
-    <p class="subhead">Search and filter across vendors, offerings, contacts, phone numbers, websites, and notes. Optimized for desktop tables and mobile cards.</p>
+    <p class="subhead">Search and filter across vendors, offerings, contacts, phone numbers, websites, and notes. Optimized for desktop and mobile cards.</p>
     <div class="grid">
       <input id="search" type="text" placeholder="Search all fields">
       <select id="category"></select>
@@ -308,27 +260,7 @@ tbody tr:hover {
     </div>
   </div>
 
-  <div id="desktop" class="panel desktop table-panel">
-    <table>
-      <thead>
-        <tr>
-          <th class="col-vendor">Vendor</th>
-          <th class="col-category">Category</th>
-          <th class="col-subcategory">Subcategory</th>
-          <th class="col-offerings">Offerings</th>
-          <th class="col-contact">Contact</th>
-          <th class="col-phone">Phone</th>
-          <th class="col-mobile">Mobile</th>
-          <th class="col-email">Email</th>
-          <th class="col-website">Website</th>
-          <th class="col-notes">Notes</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-  </div>
-
-  <div id="mobile" class="mobile cards"></div>
+  <div id="cards" class="cards"></div>
   <div id="empty" class="panel empty">No matching records.</div>
 </div>
 
@@ -1326,6 +1258,7 @@ tbody tr:hover {
   }
 ]
 </script>
+
 <script>
 (function () {
   var raw = document.getElementById('records-data').textContent || '[]';
@@ -1377,7 +1310,7 @@ tbody tr:hover {
     return u.replace('https://www/', 'https://www.');
   }
 
-  function formatUSPhone(value) {
+  function formatPhone(value) {
     var raw = text(value).trim();
     if (!raw || raw === 'XXX-XXX-XXXX') return raw;
     if (raw.indexOf('+') === 0 && raw.indexOf('+1') !== 0) return raw;
@@ -1391,14 +1324,19 @@ tbody tr:hover {
     return raw;
   }
 
+  function telHref(value) {
+    return 'tel:' + text(value).replace(/[^\d+]/g, '');
+  }
+
+  function compactLabelFromUrl(url) {
+    var clean = text(url).replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '');
+    return clean || text(url);
+  }
+
   function prepRecord(r) {
     r.website = normalizeWebsite(r.website);
-    r.phone = Array.isArray(r.phone)
-      ? r.phone.map(formatUSPhone)
-      : formatUSPhone(r.phone);
-    r.mobile = Array.isArray(r.mobile)
-      ? r.mobile.map(formatUSPhone)
-      : formatUSPhone(r.mobile);
+    r.phone = Array.isArray(r.phone) ? r.phone.map(formatPhone) : formatPhone(r.phone);
+    r.mobile = Array.isArray(r.mobile) ? r.mobile.map(formatPhone) : formatPhone(r.mobile);
     return r;
   }
 
@@ -1443,9 +1381,7 @@ tbody tr:hover {
     var values = [];
     for (var i = 0; i < records.length; i++) {
       var arr = toArray(records[i][field]);
-      for (var j = 0; j < arr.length; j++) {
-        values.push(arr[j]);
-      }
+      for (var j = 0; j < arr.length; j++) values.push(arr[j]);
     }
     return uniq(values);
   }
@@ -1455,11 +1391,8 @@ tbody tr:hover {
     setOptions(el('subcategory'), 'All subcategories', collectValues('subcategory'));
     setOptions(el('vendor'), 'All vendors', collectValues('vendor'));
     setOptions(el('contact'), 'All contacts', collectValues('contact'));
-
     var offeringValues = [];
-    for (var i = 0; i < records.length; i++) {
-      offeringValues = offeringValues.concat(toArray(records[i].offerings));
-    }
+    for (var i = 0; i < records.length; i++) offeringValues = offeringValues.concat(toArray(records[i].offerings));
     setOptions(el('offering'), 'All offerings', uniq(offeringValues));
   }
 
@@ -1472,42 +1405,56 @@ tbody tr:hover {
     return false;
   }
 
-  function renderChips(values, emptyLabel) {
+  function chip(textValue, className) {
+    return '<span class="chip ' + (className || '') + '">' + esc(textValue) + '</span>';
+  }
+
+  function linkChip(textValue, href, className) {
+    return '<a class="chip-link ' + (className || '') + '" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + esc(textValue) + '</a>';
+  }
+
+  function renderChipGroup(values, className, emptyLabel) {
     var arr = toArray(values);
-    if (!arr.length) return '<span class="chip empty-chip">' + esc(emptyLabel || '—') + '</span>';
-    var out = '';
-    for (var i = 0; i < arr.length; i++) {
-      out += '<span class="chip">' + esc(arr[i]) + '</span>';
-    }
-    return out;
+    if (!arr.length) return '<div class="chips"><span class="chip empty-chip">' + esc(emptyLabel || '—') + '</span></div>';
+    var out = '<div class="chips">';
+    for (var i = 0; i < arr.length; i++) out += chip(arr[i], className);
+    return out + '</div>';
   }
 
-  function renderStack(values, formatter) {
+  function renderPhoneChips(values, emptyLabel) {
     var arr = toArray(values);
-    if (!arr.length) return '<span class="muted">—</span>';
-    var out = '<div class="stack">';
+    if (!arr.length) return '<div class="chips"><span class="chip empty-chip">' + esc(emptyLabel || '—') + '</span></div>';
+    var out = '<div class="chips">';
     for (var i = 0; i < arr.length; i++) {
-      out += '<div>' + (formatter ? formatter(arr[i]) : esc(arr[i])) + '</div>';
+      var v = text(arr[i]).trim();
+      if (!v || v === 'XXX-XXX-XXXX') out += '<span class="chip empty-chip">—</span>';
+      else out += '<a class="chip-link phone" href="' + esc(telHref(v)) + '">' + esc(v) + '</a>';
     }
-    out += '</div>';
-    return out;
+    return out + '</div>';
   }
 
-  function renderEmail(value) {
-    var v = text(value).trim();
-    if (!v) return '<span class="muted">—</span>';
-    return '<a href="mailto:' + esc(v) + '">' + esc(v) + '</a>';
+  function renderEmailChips(values, emptyLabel) {
+    var arr = toArray(values);
+    if (!arr.length) return '<div class="chips"><span class="chip empty-chip">' + esc(emptyLabel || '—') + '</span></div>';
+    var out = '<div class="chips">';
+    for (var i = 0; i < arr.length; i++) {
+      var v = text(arr[i]).trim();
+      if (!v) out += '<span class="chip empty-chip">—</span>';
+      else out += '<a class="chip-link email" href="mailto:' + esc(v) + '">' + esc(v) + '</a>';
+    }
+    return out + '</div>';
   }
 
-  function compactLabelFromUrl(url) {
-    var clean = text(url).replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '');
-    return clean || text(url);
-  }
-
-  function renderWebsite(value) {
+  function renderWebsiteChip(value) {
     var url = text(value).trim();
-    if (!url) return '<span class="muted">—</span>';
-    return '<a class="link-chip" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(compactLabelFromUrl(url)) + '</a>';
+    if (!url) return '<div class="chips"><span class="chip empty-chip">—</span></div>';
+    return '<div class="chips">' + linkChip(compactLabelFromUrl(url), url, 'website') + '</div>';
+  }
+
+  function renderNotesChip(value) {
+    var v = text(value).trim();
+    if (!v) return '<div class="chips"><span class="chip empty-chip">—</span></div>';
+    return '<div class="chips">' + chip(v, '') + '</div>';
   }
 
   function filterRecords() {
@@ -1529,43 +1476,30 @@ tbody tr:hover {
     });
   }
 
+  function renderCard(r) {
+    return ''
+      + '<article class="panel card">'
+      +   '<div class="card-head">'
+      +     '<div><h3>' + esc(r.vendor) + '</h3></div>'
+      +     '<div class="vendor-mark" aria-hidden="true"></div>'
+      +   '</div>'
+      +   '<div class="row"><div class="label">Category</div>' + renderChipGroup(r.category, '') + '</div>'
+      +   '<div class="row"><div class="label">Subcategory</div>' + renderChipGroup(r.subcategory, '') + '</div>'
+      +   '<div class="row"><div class="label">Offerings</div>' + renderChipGroup(r.offerings, 'offering') + '</div>'
+      +   '<div class="row"><div class="label">Contact</div>' + renderChipGroup(r.contact, '') + '</div>'
+      +   '<div class="row"><div class="label">Phone</div>' + renderPhoneChips(r.phone) + '</div>'
+      +   '<div class="row"><div class="label">Mobile</div>' + renderPhoneChips(r.mobile) + '</div>'
+      +   '<div class="row"><div class="label">Email</div>' + renderEmailChips(r.email) + '</div>'
+      +   '<div class="row"><div class="label">Website</div>' + renderWebsiteChip(r.website) + '</div>'
+      +   '<div class="row"><div class="label">Notes</div>' + renderNotesChip(r.notes) + '</div>'
+      + '</article>';
+  }
+
   function render() {
     var filtered = filterRecords();
-    var tableHtml = '';
     var cardsHtml = '';
-
-    for (var i = 0; i < filtered.length; i++) {
-      var r = filtered[i];
-      tableHtml += ''
-        + '<tr>'
-        + '<td class="col-vendor"><strong>' + esc(r.vendor) + '</strong></td>'
-        + '<td class="col-category">' + esc(r.category) + '</td>'
-        + '<td class="col-subcategory">' + esc(r.subcategory) + '</td>'
-        + '<td class="col-offerings"><div class="chips">' + renderChips(r.offerings, '—') + '</div></td>'
-        + '<td class="col-contact">' + renderStack(r.contact) + '</td>'
-        + '<td class="col-phone">' + renderStack(r.phone) + '</td>'
-        + '<td class="col-mobile">' + renderStack(r.mobile) + '</td>'
-        + '<td class="col-email">' + renderStack(r.email, renderEmail) + '</td>'
-        + '<td class="col-website">' + renderWebsite(r.website) + '</td>'
-        + '<td class="col-notes">' + (r.notes ? esc(r.notes) : '<span class="muted">—</span>') + '</td>'
-        + '</tr>';
-
-      cardsHtml += ''
-        + '<div class="panel card">'
-        +   '<h3>' + esc(r.vendor) + '</h3>'
-        +   '<div class="meta">' + esc(r.category) + ' • ' + esc(r.subcategory) + '</div>'
-        +   '<div class="row"><div class="label">Offerings</div><div class="chips">' + renderChips(r.offerings, '—') + '</div></div>'
-        +   '<div class="row"><div class="label">Contact</div><div class="value">' + renderStack(r.contact) + '</div></div>'
-        +   '<div class="row"><div class="label">Phone</div><div class="value">' + renderStack(r.phone) + '</div></div>'
-        +   '<div class="row"><div class="label">Mobile</div><div class="value">' + renderStack(r.mobile) + '</div></div>'
-        +   '<div class="row"><div class="label">Email</div><div class="value">' + renderStack(r.email, renderEmail) + '</div></div>'
-        +   '<div class="row"><div class="label">Website</div><div class="value">' + renderWebsite(r.website) + '</div></div>'
-        +   '<div class="row"><div class="label">Notes</div><div class="value">' + (r.notes ? esc(r.notes) : '<span class="muted">—</span>') + '</div></div>'
-        + '</div>';
-    }
-
-    el('tableBody').innerHTML = tableHtml;
-    el('mobile').innerHTML = cardsHtml;
+    for (var i = 0; i < filtered.length; i++) cardsHtml += renderCard(filtered[i]);
+    el('cards').innerHTML = cardsHtml;
     el('visibleCount').textContent = String(filtered.length);
     el('totalCount').textContent = String(records.length);
     el('empty').style.display = filtered.length ? 'none' : 'block';
